@@ -14,7 +14,7 @@ def image2txt():
     data = file_obj.read()
     f.write(data)
     f.close()
-    result = img2txt('./'+str(count)+'.jpg')
+    result = img2txt('./img/'+str(count)+'.jpg')
   return result
 
 
