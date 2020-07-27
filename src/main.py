@@ -50,5 +50,7 @@ def img2txt(img_path):
 
     text=text.replace(" ","")
     text=text.replace("\n","<br />")
-    return render_template("/views/result.html", text=text)
+    resp = make_response(render_template("/views/result.html", text=text))
+    resp.cache_control.no_cache = False
+    return resp
     
