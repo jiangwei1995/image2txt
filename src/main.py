@@ -49,5 +49,6 @@ def img2txt(img_path):
     print (r"计算机网络_"+str(i)+r"转换完成，耗时：" + str((endtime - starttime).seconds))
 
     text=text.replace(" ","")
+    text=text.replace("\n","<br />")
     return render_template("/views/result.html", text=text)
     
