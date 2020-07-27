@@ -42,7 +42,7 @@ def img2txt(img_path):
   #   return text
   for i in range(1,2):
     starttime = datetime.datetime.now()
-    image = Image.open('img/'+img_path)
+    image = Image.open('src/static/img/'+img_path)
     text = pytesseract.image_to_string(image, lang='chi_sim')  # 使用简体中文解析图片
     endtime = datetime.datetime.now()
 
