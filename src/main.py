@@ -10,11 +10,11 @@ def image2txt():
   file_obj = request.files.get('pic')
   print(file_obj)
   if file_obj:
-    f = open('./img/'+str(count)+'.jpg','wb')
+    f = open('img/'+str(count)+'.jpg','wb')
     data = file_obj.read()
     f.write(data)
     f.close()
-    result = img2txt('./img/'+str(count)+'.jpg')
+    result = img2txt(str(count)+'.jpg')
   return result
 
 
