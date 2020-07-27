@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask,request,render_template, make_response
 import pytesseract
+import random
 from PIL import Image
 import datetime
 app = Flask(__name__)
@@ -16,11 +17,12 @@ def image2txt():
   print(file_obj)
   if file_obj:
     # f = open('img/'+str(count)+'.jpg','wb')
-    f = open('src/static/img/'+str(count)+'.jpg','wb')
+    img_path = 'src/static/img/'+ranstr(6)+'.jpg'
+    f = open(img_path,'wb')
     data = file_obj.read()
     f.write(data)
     f.close()
-    result = img2txt(str(count)+'.jpg')
+    result = img2txt(img_path)
     return result
   else: 
     return "文件上传失败"
@@ -42,14 +44,25 @@ def img2txt(img_path):
   #   return text
   for i in range(1,2):
     starttime = datetime.datetime.now()
-    image = Image.open('src/static/img/'+img_path)
+    image = Image.open(img_path)
     text = pytesseract.image_to_string(image, lang='chi_sim')  # 使用简体中文解析图片
     endtime = datetime.datetime.now()
 
     print (r"计算机网络_"+str(i)+r"转换完成，耗时：" + str((endtime - starttime).seconds))
 
     text=text.replace(" ","")
-    resp = make_response(render_template("/views/result.html", text=text, img_path= 'static/img/'+img_path))
+    resp = make_response(render_template("/views/result.html", text=text, img_path= img_path[4:]))
     resp.cache_control.no_cache = False
     return resp
     
+
+def ranstr(num):
+  # 猜猜变量名为啥叫 H
+  H = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  salt = ''
+  for i in range(num):
+      salt += random.choice(H)
+  return salt
+  salt = ranstr(6)
+  return salt
