@@ -49,7 +49,7 @@ def img2txt(img_path):
     print (r"计算机网络_"+str(i)+r"转换完成，耗时：" + str((endtime - starttime).seconds))
 
     text=text.replace(" ","")
-    resp = make_response(render_template("/views/result.html", text=text, img_path= 'src/static/img/'+img_path))
+    resp = make_response(render_template("/views/result.html", text=text, img_path= 'static/img/'+img_path))
     resp.cache_control.no_cache = False
     return resp
     
